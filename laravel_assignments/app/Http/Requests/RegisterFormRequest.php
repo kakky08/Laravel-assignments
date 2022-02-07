@@ -23,10 +23,11 @@ class RegisterFormRequest extends FormRequest
      */
     public function rules()
     {
+        // 新規登録のバリデーション
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users|max:255',
-            'password' => 'required|confirmed|min:8|max:255|alpha_num'
+            'password' => 'required|confirmed|min:7|max:255|alpha_num'
         ];
     }
 }
