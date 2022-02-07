@@ -12178,3 +12178,19 @@ fieldset:disabled .btn {
   }
 }
 
+.card-padding-none {
+  padding: 0;
+}
+
+.form-button {
+  color: #fff;
+}
+
+.navbar {
+  margin: 0px 80px 24px;
+}
+
+.form-auth-body {
+  padding: 2rem 2rem;
+}
+

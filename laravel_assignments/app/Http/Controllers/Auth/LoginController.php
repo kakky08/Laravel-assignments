@@ -3,37 +3,34 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginFormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
+     * @return View
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function showLogin()
     {
-        $this->middleware('guest')->except('logout');
+        return view('auth.login');
+    }
+
+    /**
+     * @param App\Http\Requests\LoginFormRequest
+     * $request
+     */
+    public function login(LoginFormRequest $request)
+    {
+        $credientials = $request->only('email', 'password');
+
+        if(Auth::attempt($credientials))
+        {
+            return redirect()->intended('home');
+        }
+
+        return back()->withErrors([
+            'login_error' => 'メールアドレスかパスワードが間違っています。'
+        ]);
     }
 }
