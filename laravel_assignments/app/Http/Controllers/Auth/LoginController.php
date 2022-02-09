@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($credientials))
         {
-            return redirect()->intended('home');
+            return redirect()->intended(route('show.home'));
         }
 
         return back()->withErrors([
